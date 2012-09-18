@@ -1,0 +1,22 @@
+development:
+  sessions:
+    default:
+      hosts: 
+        - localhost:27017
+      database: sharing_is_loving_development
+
+test:
+  sessions:
+    default:
+      hosts: 
+        - localhost:27017
+      database: sharing_is_loving_test
+
+production:
+  sessions:
+    default:
+      database: sharing_is_loving
+      username: sharing_is_loving
+      password: passw0rd
+      hosts:
+        - ds037617.mongolab.com:37617
