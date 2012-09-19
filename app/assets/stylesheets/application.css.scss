@@ -1,0 +1,107 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require_tree .
+*/
+.canvas {
+	position:relative;
+	margin:20px auto;
+	width:960px;
+	min-height:500px;
+	box-sizing: border-box;
+	padding:20px;
+	box-shadow:5px 5px 20px rgba(0,0,0,.2);
+	.logo {
+		text-align:center;
+		margin:20px auto 40px;
+		img {
+			width:200px;
+		}
+	}
+	.footer {
+		text-align:center;
+		margin-top:20px;
+		padding:20px;
+		border-top:1px solid #ccc;
+		font-weight:normal;
+		color:#ccc;
+		font-size:15px;
+		.hart {
+			color:pink;
+			margin:0 -2px;
+		}
+	}
+	.content {
+		padding-right:0px
+	}
+	.sidebar {
+		background:rgb(245,245,245);
+		padding:20px;
+		.search {
+			margin:30px 0 0;
+		}
+		.tag-list {
+			margin:20px 0 0;
+			h4 {
+				
+			}
+			ul {
+				margin:0;
+				padding:0;
+				li {
+					list-style:none;
+				}
+			}
+		}
+	}
+}
+.files {
+	.preview {
+		width:100px;
+		padding:20px 20px 0 0;
+		ul {
+			margin:20px 0 0;
+			padding:0;
+			li {
+				font-size:80%;
+				list-style:none;
+			}
+		}
+	}
+	h4 a {
+		color:rgb(50,50,50);
+		&:hover {
+			color:#005580;
+		}
+	}
+	.tags {
+		font-size:90%;
+	}
+	.download {
+		margin:5px 0 10px;
+	}
+}
+.tagged-header {
+	padding:8px 0;
+	.remove {
+		font-weight:normal;
+		font-size:14px;
+		color:#08c;
+		&:hover {
+			color:#005580;
+		}
+	}
+	.prefix {
+		display:inline;
+		font-weight:normal;
+		color:#999;
+	}
+}

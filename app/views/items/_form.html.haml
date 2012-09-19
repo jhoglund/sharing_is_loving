@@ -1,0 +1,23 @@
+.control-group
+	%label.control-label Name
+	.controls
+		= form.input :name, :label => false
+.control-group
+	%label.control-label Document
+	.controls
+		= form.input :file, :label => 'Document', :label => false, :as => :file
+.control-group
+	%label.control-label Description
+	.controls
+		= form.input :description, :as => :text, :label => false, :input_html => { :rows => '3' }
+.control-group
+	%label.control-label Thumbnail
+	.controls
+		= form.input :preview, :label => 'Preview', :label => false, :as => :file
+.control-group
+	%label.control-label Tags
+	.controls
+		= form.input :tag_list, :label => false, :placeholder => 'Comma seperated'
+.control-group
+	.controls
+		%button.btn.btn-primary Save

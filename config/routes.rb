@@ -11,6 +11,8 @@ SharingIsLoving::Application.routes.draw do
   # This route can be invoked with purchase_url(:id => product.id)
 
   resources :items
+  resources :tags, :only => :show
+  resource :search
 
   # Sample resource route with options:
   #   resources :products do
@@ -47,7 +49,7 @@ SharingIsLoving::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
+  root :to => 'items#index'
 
   # See how all your routes lay out with "rake routes"
 

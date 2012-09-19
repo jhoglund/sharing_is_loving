@@ -1,4 +1,2 @@
-= form_for @item, :html => {:multipart => true} do |f|
-	= f.file_field :file
-	%br
-	= f.submit
+= simple_form_for @item, :html => {:multipart => true, :class => 'form-horizontal'} do |form|
+	= render :partial => 'form', :object => form

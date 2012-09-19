@@ -1,0 +1,25 @@
+!!!
+%html
+	%head
+		%title 
+			FJORD – Sharing is Loving
+		= stylesheet_link_tag    "application", :media => "all"
+		= javascript_include_tag "application"
+		= csrf_meta_tags
+		
+	%body
+		.canvas
+			.container-fluid
+				.row-fluid
+					.span12
+						.logo
+							%img(src="#{asset_path('fjord_logo.png')}")
+				.row-fluid
+					= yield
+				.row-fluid
+					.span12
+						.footer
+							FJORD – Sharing is l
+							%span.hart ❤
+							ving
+			
