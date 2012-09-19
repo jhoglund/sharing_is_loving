@@ -25,11 +25,11 @@
 										= item.created_at.strftime("%m/%d/%Y")
 						%td
 							%h4
-								%a(href="#{item.file.url}")
+								%a
 									= item.name
 							.download
 								%span.icon-file
-								%a
+								%a(href="#{item.file.url}")
 									= item.file_filename
 							%p= item.description
 							- unless item.tags.blank?
