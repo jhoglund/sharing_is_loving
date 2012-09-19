@@ -1,10 +1,16 @@
 .row-fluid
 	.span8.content
-		- if params[:controller]=='tags' and  !params[:id].blank?
+		- if tagged?
 			.tagged-header
 				%h4
 					.prefix Documents tagged as:
 					= params[:id].titlecase
+					= link_to 'remove...', root_path, :class => 'remove'
+		- if search?
+			.tagged-header
+				%h4
+					.prefix Search results for as:
+					= params[:query]
 					= link_to 'remove...', root_path, :class => 'remove'
 		- if flash
 			- flash.each do |k,v|
@@ -42,10 +48,12 @@
 			Add document
 		.search
 			%h4 Search
-			%form{:action => search_path, :method => 'get'}
+			%form{:action => search_path, :method => 'get', :class => search? ? 'active-search' : ''}
 				.input-append
-					%input.span10{:type=>'text', :name => 'query', :value => params[:query], :style=>"position:relative;top:1px;height:31px!important;"}
+					%input.span10.query{:type=>'text', :name => 'query', :value => params[:query], :style=>"position:relative;top:1px;height:31px!important;"}
 					%button.btn.icon-search{:type=>'submit'}
+				- if search?
+					%a.icon-remove-sign{ :href => root_path }
 		.tag-list
 			%h4 Tags
 			%ul

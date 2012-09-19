@@ -14,10 +14,6 @@ end
 
 module SharingIsLoving
   class Application < Rails::Application    
-    # HTTP Authentication
-    config.middleware.insert_after(::Rack::Lock, "::Rack::Auth::Basic", "Production") do |u, p|
-      [u, p] == ['fjord', 'share4ndL0v3!']
-    end
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.

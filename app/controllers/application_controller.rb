@@ -1,6 +1,16 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   
+  helper_method :tagged?, :search?
+  
+  def tagged?
+    params[:controller]=='tags' and  !params[:id].blank?
+  end
+  
+  def search?
+    !params[:query].blank?
+  end
+  
   protected
   
   def load_tags
