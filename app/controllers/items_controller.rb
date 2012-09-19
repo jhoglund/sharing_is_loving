@@ -1,5 +1,4 @@
 class ItemsController < ApplicationController
-  before_filter :load_tags, :only => [:index, :tags]
   
   def index
     @items = Item.all

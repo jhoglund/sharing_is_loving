@@ -1,53 +1,54 @@
-.row-fluid
-	.span8.content
-		- if params[:controller]=='tags' and  !params[:id].blank?
-			.tagged-header
-				%h4
-					.prefix Documents tagged as:
-					= params[:id].titlecase
-					= link_to 'remove...', root_path, :class => 'remove'
-		- if flash
-			- flash.each do |k,v|
-				.alert.alert-block{ :class => "alert-#{k.to_s}" }= v
-		%table.table.files
-			%tbody
-				- @items.each do |item|
-					%tr
-						%td.preview
-							%img.img-polaroid(src="#{item.preview.thumb.url}" style="margin:0 10px 0 0;width:100px;height:100px")
-							%ul
-								- unless item.file.file.nil?
-									%li
-										Size:
-										= number_to_human_size(item.file.file.size)
-									%li
-										Added:
-										= item.created_at.strftime("%m/%d/%Y")
-						%td
-							%h4
-								%a(href="#{item.file.url}")
-									= item.name
-							.download
-								%span.icon-file
-								%a
-									= item.file_filename
-							%p= item.description
-							- unless item.tags.blank?
-								%p.tags 
-									Tags:
-									= item.tags.map{|t| link_to(t, tag_path(t)) }.join(', ').html_safe
+- if false
+	.row-fluid
+		.span8.content
+			- if params[:controller]=='tags' and  !params[:id].blank?
+				.tagged-header
+					%h4
+						.prefix Documents tagged as:
+						= params[:id].titlecase
+						= link_to 'remove...', root_path, :class => 'remove'
+			- if flash
+				- flash.each do |k,v|
+					.alert.alert-block{ :class => "alert-#{k.to_s}" }= v
+			%table.table.files
+				%tbody
+					- @items.each do |item|
+						%tr
+							%td.preview
+								%img.img-polaroid(src="#{item.preview.thumb.url}" style="margin:0 10px 0 0;width:100px;height:100px")
+								%ul
+									- unless item.file.file.nil?
+										%li
+											Size:
+											= number_to_human_size(item.file.file.size)
+										%li
+											Added:
+											= item.created_at.strftime("%m/%d/%Y")
+							%td
+								%h4
+									%a(href="#{item.file.url}")
+										= item.name
+								.download
+									%span.icon-file
+									%a
+										= item.file_filename
+								%p= item.description
+								- unless item.tags.blank?
+									%p.tags 
+										Tags:
+										= item.tags.map{|t| link_to(t, tag_path(t)) }.join(', ').html_safe
 			
-	.span4.sidebar
-		%a.btn.btn-primary.btn-large.icon-plus(href="#{new_item_path}" style="display:block")
-			Add document
-		.search
-			%h4 Search
-			%form{:action => search_path, :method => 'get'}
-				.input-append
-					%input.span10{:type=>'text', :name => 'query', :value => params[:query], :style=>"position:relative;top:1px;height:31px!important;"}
-					%button.btn.icon-search{:type=>'submit'}
-		.tag-list
-			%h4 Tags
-			%ul
-				- @tags.each do |tag|
-					%li= link_to(tag.titlecase, tag_path(tag))
+		.span4.sidebar
+			%a.btn.btn-primary.btn-large.icon-plus(href="#{new_item_path}" style="display:block")
+				Add document
+			.search
+				%h4 Search
+				%form{:action => search_path, :method => 'get'}
+					.input-append
+						%input.span10{:type=>'text', :name => 'query', :value => params[:query], :style=>"position:relative;top:1px;height:31px!important;"}
+						%button.btn.icon-search{:type=>'submit'}
+			.tag-list
+				%h4 Tags
+				%ul
+					- @tags.each do |tag|
+						%li= link_to(tag.titlecase, tag_path(tag))
