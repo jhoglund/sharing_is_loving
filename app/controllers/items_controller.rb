@@ -10,9 +10,7 @@ class ItemsController < ApplicationController
   end
   
   def create
-    # params[:item]
-    @item = Item.new(:name => 'test', :tag_list => 'xxx,aaa')
-    puts @item
+    @item = Item.new(params[:item])
     @item.save!
     redirect_to root_path
   end

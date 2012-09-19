@@ -19,10 +19,14 @@ class Item
   search_in :name, :description, :taggings => :name
   
   after_initialize :create_token
+  
+  embeds_many :ratings
 
   field :name
   field :description
   field :secure_token
+  
+  accepts_nested_attributes_for :ratings
   
   def path base='files'
     File.join(Rails.env, 'items', base, self.secure_token)
