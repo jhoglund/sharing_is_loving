@@ -5,7 +5,7 @@
 .control-group
 	%label.control-label Document
 	.controls
-		=# form.input :file, :label => 'Document', :label => false, :as => :file
+		= form.input :file, :label => 'Document', :label => false, :as => :file
 .control-group
 	%label.control-label Description
 	.controls
@@ -13,11 +13,11 @@
 .control-group
 	%label.control-label Thumbnail
 	.controls
-		=# form.input :preview, :label => 'Preview', :label => false, :as => :file
+		= form.input :preview, :label => 'Preview', :label => false, :as => :file
 .control-group
 	%label.control-label Tags
 	.controls
-		=# form.input :tag_list, :label => false, :placeholder => 'Comma seperated'
+		= form.input :tag_list, :label => false, :placeholder => 'Comma seperated'
 .control-group
 	.controls
 		%button.btn.btn-primary Save

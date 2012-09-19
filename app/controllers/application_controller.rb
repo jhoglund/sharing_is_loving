@@ -4,7 +4,6 @@ class ApplicationController < ActionController::Base
   protected
   
   def load_tags
-    return @tags = []
     @tags = Item.all_tags.map{|t| t[:name] } rescue []
   end
   

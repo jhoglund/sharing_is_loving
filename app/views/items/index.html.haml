@@ -14,26 +14,25 @@
 				- @items.each do |item|
 					%tr
 						%td.preview
-						- if false
 							%img.img-polaroid(src="#{item.preview.thumb.url}" style="margin:0 10px 0 0;width:100px;height:100px")
 							%ul
-								%li
-									Size:
-									- if false
+								- unless item.file.file.nil?
+									%li
+										Size:
 										= number_to_human_size(item.file.file.size)
-								%li
-									Added:
-									= item.created_at.strftime("%m/%d/%Y")
+									%li
+										Added:
+										= item.created_at.strftime("%m/%d/%Y")
 						%td
 							%h4
-								= item.name
+								%a(href="#{item.file.url}")
+									= item.name
 							.download
 								%span.icon-file
-								- if false
-									%a(href="#{item.file.url}")
-										= item.file_filename
+								%a
+									= item.file_filename
 							%p= item.description
-							- unless true #item.tags.blank?
+							- unless item.tags.blank?
 								%p.tags 
 									Tags:
 									= item.tags.map{|t| link_to(t, tag_path(t)) }.join(', ').html_safe
