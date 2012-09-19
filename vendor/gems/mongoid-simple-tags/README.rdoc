@@ -1,0 +1,44 @@
+= mongoid-simple-tags {<img src="https://secure.travis-ci.org/chebyte/mongoid-simple-tags.png"/>}[http://travis-ci.org/chebyte/mongoid-simple-tags]
+
+mongoid-simple-tags is a basic and simple tagging system for mongoid using map-reduce function
+(no backwards compatibility with mongoid v2!)
+
+== Install
+
+  Add the following to Gemfile:
+  
+    gem "mongoid-simple-tags", "0.0.7"
+
+== Usage
+ 
+=== Model
+
+  class User
+    include Mongoid::Document
+    include Mongoid::Document::Taggable
+  end
+
+=== Console
+
+  u = User.create(:name => "Tuquito", tag_list: "linux, tucuman, free software")
+
+  u.tags     # => ["linux","tucuman","free software"]
+
+  User.tagged_with("linux") # => u
+  User.tagged_with(["tucuman", "free software"]) # => u
+
+  u2 = User.new(:name => "ubuntu")
+  u2.tag_list = "linux"
+  u2.save
+
+  User.tagged_with("linux") # => [u, u2]
+
+  # using map-reduce function
+  
+  User.all_tags #=>[{:name=>"free software", :count=>1}, {:name=>"linux", :count=>2}, {:name=>"tucuman", :count=>1}] 
+
+
+== Copyright
+
+Copyright (c) 2011 chebyte(mauro torres). See LICENSE.txt for
+further details.
