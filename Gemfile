@@ -15,9 +15,7 @@ gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid', :branch => "mongoi
 gem "fog", "~> 1.3.1" # https://github.com/fog/fog
 gem 'mini_magick', '3.4'
 gem 'rack-raw-upload', '1.1.0'
-# gem 'mongoid_slug', :git => 'https://github.com/jhoglund/mongoid-slug.git' # Mongoid 3 support
-# gem 'mongoid_search' # https://github.com/mauriciozaffari/mongoid_search
-# gem 'mongoid_taggable_with_context' # https://github.com/aq1018/mongoid_taggable_with_context
+gem 'mongoid_search', :path => 'vendor/gems/mongoid_search' # https://github.com/mauriciozaffari/mongoid_search
 gem "mongoid-simple-tags", "0.0.7", :path => 'vendor/gems/mongoid-simple-tags' # https://github.com/chebyte/mongoid-simple-tags
 
 
