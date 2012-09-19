@@ -1,9 +1,5 @@
 SharingIsLoving::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
-  # HTTP Authentication
-  config.middleware.insert_after(::Rack::Lock, "::Rack::Auth::Basic", "Production") do |u, p|
-    [u, p] == ['fjord', 'share4ndL0v3!']
-  end
 
   # Code is not reloaded between requests
   config.cache_classes = true
