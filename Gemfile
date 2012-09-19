@@ -4,7 +4,7 @@ gem 'rails', '3.2.1'
 
 # Gemfile
 gem 'hpricot'
-gem "mongoid", "~> 3.0.0.rc"
+#gem "mongoid", "~> 3.0.3"
 gem "bson_ext", "~> 1.5"
 gem "haml"
 gem 'crack'
