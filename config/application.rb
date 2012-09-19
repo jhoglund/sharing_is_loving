@@ -58,5 +58,16 @@ module SharingIsLoving
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+    
+    config.action_mailer.smtp_settings = {
+      :port           => 25, 
+      :address        => 'smtp.mailgun.org',
+      :user_name      => 'postmaster@fjord.mailgun.org',
+      :password       => '5w127opzeqr5',
+      :domain         => 'morning-basin-5184.herokuapp.com',
+      :authentication => :plain,
+    }
+    config.action_mailer.delivery_method = :smtp
+    
   end
 end

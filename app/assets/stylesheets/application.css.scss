@@ -26,7 +26,7 @@
 			width:200px;
 		}
 	}
-	.footer {
+	.footer, .utilities {
 		text-align:center;
 		margin-top:20px;
 		padding:20px;
@@ -38,6 +38,9 @@
 			color:pink;
 			margin:0 -2px;
 		}
+	}
+	.utilities {
+		padding-bottom:0;
 	}
 	.content {
 		padding-right:0px
@@ -80,7 +83,7 @@
 		width:100px;
 		padding:20px 20px 0 0;
 		ul {
-			margin:20px 0 0;
+			margin:5px 0 0;
 			padding:0;
 			li {
 				font-size:80%;
@@ -94,7 +97,7 @@
 			color:#005580;
 		}
 	}
-	.tags {
+	.tags, .user {
 		font-size:90%;
 	}
 	.download {

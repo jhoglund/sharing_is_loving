@@ -1,4 +1,4 @@
-class ItemsController < ApplicationController
+class ItemsController < RestrictedAccessController
   before_filter :load_tags, :only => [:index, :tags]
   
   def index
@@ -11,6 +11,7 @@ class ItemsController < ApplicationController
   
   def create
     @item = Item.new(params[:item])
+    @item.user = current_user
     @item.save!
     redirect_to root_path
   end

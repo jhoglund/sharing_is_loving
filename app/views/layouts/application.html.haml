@@ -18,6 +18,11 @@
 					= yield
 				.row-fluid
 					.span12
+						- if signed_in?
+							.utilities
+								= link_to("Sign-out", destroy_user_session_path, :method => :delete)
+								&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+								= link_to_unless_current("Update profile", edit_user_registration_path)
 						.footer
 							FJORD – Sharing is l
 							%span.hart ❤

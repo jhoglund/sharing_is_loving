@@ -1,4 +1,4 @@
-class SearchesController < ApplicationController
+class SearchesController < RestrictedAccessController
   before_filter :load_tags
   
   def show

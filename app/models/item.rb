@@ -21,6 +21,7 @@ class Item
   after_initialize :create_token
   
   embeds_many :ratings
+  belongs_to :user 
 
   field :name
   field :description

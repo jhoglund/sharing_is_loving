@@ -29,6 +29,10 @@
 									%li
 										Added:
 										= item.created_at.strftime("%m/%d/%Y")
+								- unless item.user.blank?
+									%li 
+										By:
+										= item.user.name
 						%td
 							%h4
 								%a
