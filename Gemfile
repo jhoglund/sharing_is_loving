@@ -4,7 +4,7 @@ gem 'rails', '3.2.1'
 
 # Gemfile
 gem 'hpricot'
-gem "mongoid", "3.0.0"
+gem "mongoid", "3.0.0.rc"
 gem "bson_ext", "~> 1.5"
 gem "haml"
 gem 'crack'
@@ -16,7 +16,7 @@ gem "fog", "~> 1.3.1" # https://github.com/fog/fog
 gem 'mini_magick', '3.4'
 gem 'rack-raw-upload', '1.1.0'
 # gem 'mongoid_slug', :git => 'https://github.com/jhoglund/mongoid-slug.git' # Mongoid 3 support
-gem 'mongoid_search' # https://github.com/mauriciozaffari/mongoid_search
+# gem 'mongoid_search' # https://github.com/mauriciozaffari/mongoid_search
 # gem 'mongoid_taggable_with_context' # https://github.com/aq1018/mongoid_taggable_with_context
 gem "mongoid-simple-tags", "0.0.7", :path => 'vendor/gems/mongoid-simple-tags' # https://github.com/chebyte/mongoid-simple-tags
 

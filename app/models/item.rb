@@ -2,7 +2,7 @@ class Item
   include Mongoid::Document
   include Mongoid::Timestamps
   include Mongoid::Document::Taggable
-  include Mongoid::Search
+  #include Mongoid::Search
   
   mount_uploader :file, FileUploader do
     def store_dir
@@ -16,7 +16,7 @@ class Item
     end
   end
   
-  search_in :name, :description, :taggings => :name
+  #search_in :name, :description, :taggings => :name
   
   after_initialize :create_token
   
