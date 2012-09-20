@@ -48,4 +48,8 @@ class Item
     self.tags.map{|n| Tag.new(n)}
   end
   
+  def add_rating value, user_id
+    self.ratings.create(:value => value, :user_id => user_id)
+  end
+  
 end

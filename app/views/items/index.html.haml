@@ -33,10 +33,15 @@
 									%li 
 										By:
 										= item.user.name
+								%li
+									Likes
+									%span{:id => "like_count_#{item._id}"}
+										(#{item.ratings.count})
+									= link_to_function('Like...', "$.ajax({type:'PUT',url:'/items/#{item._id}',data:{ratings: 1},success:function(){var e = $('#like_count_#{item._id}'); e.html('(' + ((parseInt(e.html().match(/\\d+/)[0]))+1)  + ')')}})")
 						%td
 							%h4
-								%a
-									= item.name
+								= item.name
+								%a.edit-item.icon-pencil{:href=> edit_item_path(item)}
 							.download
 								%span.icon-file
 								%a(href="#{item.file.url}")

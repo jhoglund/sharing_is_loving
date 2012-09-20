@@ -1,23 +1,28 @@
-.control-group
-	%label.control-label Name
-	.controls
-		= form.input :name, :label => false
-.control-group
-	%label.control-label Document
-	.controls
-		= form.input :file, :label => 'Document', :label => false, :as => :file
-.control-group
-	%label.control-label Description
-	.controls
-		= form.input :description, :as => :text, :label => false, :input_html => { :rows => '3' }
-.control-group
-	%label.control-label Thumbnail
-	.controls
-		= form.input :preview, :label => 'Preview', :label => false, :as => :file
-.control-group
-	%label.control-label Tags
-	.controls
-		= form.input :tag_list, :label => false, :placeholder => 'Comma seperated'
-.control-group
-	.controls
-		%button.btn.btn-primary Save
+= simple_form_for @item, :html => {:multipart => true, :class => 'form-horizontal'} do |f|
+	.control-group
+		%label.control-label Name
+		.controls
+			= f.input :name, :label => false
+	.control-group
+		%label.control-label Document
+		.controls
+			= f.input :file, :label => 'Document', :label => false, :as => :file
+			- unless f.object.file.file.nil?
+				%p= f.object.file_filename
+	.control-group
+		%label.control-label Description
+		.controls
+			= f.input :description, :as => :text, :label => false, :input_html => { :rows => '3' }
+	.control-group
+		%label.control-label Thumbnail
+		.controls
+			= f.input :preview, :label => 'Preview', :label => false, :as => :file
+			- unless f.object.preview.file.nil?
+				%img.img-polaroid(src="#{f.object.preview.url}" style="margin:0 10px 0 0;width:80px;height:80px")
+	.control-group
+		%label.control-label Tags
+		.controls
+			= f.input :tag_list, :label => false, :placeholder => 'Comma seperated'
+	.control-group
+		.controls
+			%button.btn.btn-primary Save

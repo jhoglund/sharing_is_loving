@@ -3,6 +3,7 @@ class Rating
   include Mongoid::Timestamps
   
   embedded_in :item
+  belongs_to :user
   
   field :value, :type => Integer
   
