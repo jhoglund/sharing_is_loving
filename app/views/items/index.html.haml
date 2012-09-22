@@ -1,5 +1,5 @@
 .row-fluid
-	.span8.content
+	.span6.content
 		- if tagged?
 			.tagged-header
 				%h4
@@ -36,12 +36,11 @@
 								%li
 									Likes
 									%span{:id => "like_count_#{item._id}"}
-										(#{item.ratings.count})
-									= link_to_function('Like...', "$.ajax({type:'PUT',url:'/items/#{item._id}',data:{ratings: 1},success:function(){var e = $('#like_count_#{item._id}'); e.html('(' + ((parseInt(e.html().match(/\\d+/)[0]))+1)  + ')')}})")
+										(#{item.rating_count})
+									= link_to_function('Like...', "sendLike('#{item._id}')")
 						%td
 							%h4
-								= item.name
-								%a.edit-item.icon-pencil{:href=> edit_item_path(item)}
+								%a{:href=> item_path(item)}= item.name
 							.download
 								%span.icon-file
 								%a(href="#{item.file.url}")
@@ -52,7 +51,7 @@
 									Tags:
 									= item.tags.map{|t| link_to(t, tag_path(t)) }.join(', ').html_safe
 			
-	.span4.sidebar
+	.span3.sidebar
 		%a.btn.btn-primary.btn-large.icon-plus(href="#{new_item_path}" style="display:block")
 			Add document
 		.search
@@ -68,3 +67,20 @@
 			%ul
 				- @tags.each do |tag|
 					%li= link_to(tag.titlecase, tag_path(tag))
+	.span3.activities
+		%h4 Activities
+		- @activities.each do |activity|
+			.activity
+				.row-fluid
+					.span3
+						%img.img-polaroid(src="#{activity.user.avatar.url}" style="width:50px;height:50px")
+					.span9
+						The document "#{link_to(activity.item.name, item_path(activity.item))}" was
+						= activity.type.downcase
+						by
+						= mail_to(activity.user.name, activity.user.email)
+						%br
+						= l(activity.created_at, :format => :short)
+				.row-fluid
+					.span12
+						%hr

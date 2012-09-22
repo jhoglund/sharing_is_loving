@@ -17,4 +17,8 @@ class ApplicationController < ActionController::Base
     @tags = Item.all_tags.map{|t| t[:name] } rescue []
   end
   
+  def load_stream
+    @activities = Activity.all.limit(10)
+  end
+  
 end

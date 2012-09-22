@@ -13,3 +13,13 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+
+var sendLike = function(id){
+	$.ajax({
+		type:'PUT',
+		url:'/items/' + id, 
+		data:{ratings: 1}
+	})
+	var e = $('#like_count_' + id); 
+	e.html('(' + ((parseInt(e.html().match(/\d+/)[0]))+1)  + ')');
+}

@@ -1,12 +1,16 @@
 class ItemsController < RestrictedAccessController
-  before_filter :load_tags, :only => [:index, :tags]
+  before_filter :load_tags, :load_stream
   
   def index
-    @items = Item.all.sort(:created_at => 1)
+    @items = Item.all
   end
   
   def new
     @item = Item.new
+  end
+  
+  def show
+    @item = Item.find(params[:id])
   end
   
   def edit
@@ -16,10 +20,17 @@ class ItemsController < RestrictedAccessController
   def update
     respond_to do |format|
       @item = Item.find(params[:id])
-      @item.update_attributes(params[:item])
-      @item.add_rating(params[:rating], current_user._id) if params[:ratings]
+      @item.created_by = current_user
+      if params[:ratings]
+        @item.add_rating(params[:rating], current_user._id)
+        @item.versionless do |item|
+          item.update_attributes(params[:item])
+        end
+      else
+        @item.update_attributes(params[:item])
+      end
       format.html do
-        redirect_to root_path
+        redirect_to item_path(@item)
       end
       format.js do
         head :ok
@@ -29,7 +40,7 @@ class ItemsController < RestrictedAccessController
   
   def create
     @item = Item.new(params[:item])
-    @item.user = current_user
+    @item.created_by = current_user
     @item.save!
     redirect_to root_path
   end

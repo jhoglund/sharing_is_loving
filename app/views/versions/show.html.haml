@@ -1,0 +1,39 @@
+.row-fluid
+	.span8.content
+		%table.table.files
+			%tbody
+				%tr
+					%td.preview
+						%img.img-polaroid(src="#{@version.preview.thumb.url}" style="margin:0 10px 0 0;width:100px;height:100px")
+						%ul
+							- unless @version.file.file.nil?
+								%li
+									Size:
+									= number_to_human_size(@version.file.file.size)
+								%li
+									Added:
+									= @version.created_at.strftime("%m/%d/%Y")
+							- unless @version.user.blank?
+								%li 
+									By:
+									= @version.user.name
+							%li
+								Likes
+								%span{:id => "like_count_#{@version._id}"}
+									(#{@version.rating_count})
+								= link_to_function('Like...', "sendLike('#{@version._id}')")
+					%td
+						%h4
+							= @version.name
+							%a.edit-item.icon-pencil{:href=> edit_item_path(@version)}
+						.download
+							%span.icon-file
+							%a(href="#{@version.file.url}")
+								= @version.file_filename
+						%p= @version.description
+						- unless @version.tags.blank?
+							%p.tags 
+								Tags:
+								= @version.tags.map{|t| link_to(t, tag_path(t)) }.join(', ').html_safe
+						%p
+							%a.btn{ :href => item_path(@item) } Close version

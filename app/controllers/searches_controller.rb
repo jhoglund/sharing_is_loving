@@ -1,5 +1,5 @@
 class SearchesController < RestrictedAccessController
-  before_filter :load_tags
+  before_filter :load_tags, :load_stream
   
   def show
     @items = Item.full_text_search(params[:query])

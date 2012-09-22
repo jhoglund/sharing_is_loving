@@ -3,6 +3,7 @@ class Item
   include Mongoid::Timestamps
   include Mongoid::Document::Taggable
   include Mongoid::Search
+  include Mongoid::Versioning
   
   mount_uploader :file, FileUploader do
     def store_dir
@@ -21,11 +22,26 @@ class Item
   after_initialize :create_token
   
   embeds_many :ratings
-  belongs_to :user 
+  
+  has_many :activities, autosave: true 
+  def activity_by person, activity='updated'
+    activities.build(:user => person, :type => activity.to_s)
+  end
+  
+  belongs_to :user
+  def created_by
+    user
+  end
+  def created_by= person
+    user= person
+  end
 
   field :name
   field :description
   field :secure_token
+  field :rating_count, :type => Integer, :default => 0
+  
+  default_scope desc(:rating_count).desc(:created_at)
   
   accepts_nested_attributes_for :ratings
   
@@ -49,7 +65,8 @@ class Item
   end
   
   def add_rating value, user_id
-    self.ratings.create(:value => value, :user_id => user_id)
+    self.ratings.build(:value => value, :user_id => user_id)
+    self.rating_count = self.rating_count + 1
   end
   
 end

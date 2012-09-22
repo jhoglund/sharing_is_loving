@@ -1,0 +1,47 @@
+.row-fluid
+	.span8.content
+		%table.table.files
+			%tbody
+				%tr
+					%td.preview
+						%img.img-polaroid(src="#{@item.preview.thumb.url}" style="margin:0 10px 0 0;width:100px;height:100px")
+						%ul
+							- unless @item.file.file.nil?
+								%li
+									Size:
+									= number_to_human_size(@item.file.file.size)
+								%li
+									Added:
+									= @item.created_at.strftime("%m/%d/%Y")
+							- unless @item.user.blank?
+								%li 
+									By:
+									= @item.user.name
+							%li
+								Likes
+								%span{:id => "like_count_#{@item._id}"}
+									(#{@item.rating_count})
+								= link_to_function('Like...', "sendLike('#{@item._id}')")
+					%td
+						%h4
+							= @item.name
+						.download
+							%span.icon-file
+							%a(href="#{@item.file.url}")
+								= @item.file_filename
+						%p= @item.description
+						- unless @item.tags.blank?
+							%p.tags 
+								Tags:
+								= @item.tags.map{|t| link_to(t, tag_path(t)) }.join(', ').html_safe
+						%p
+							%a.btn{ :href => root_path } Close
+							%a.btn.btn-primary{:href=> edit_item_path(@item)} Edit
+						
+	.span4.sidebar
+		- unless @item.versions.empty?
+			%h4 Versions
+			%ul
+			- @item.versions.each_with_index do |version, i|
+				%li= link_to(version.updated_at, item_version_path(@item, i))
+			
