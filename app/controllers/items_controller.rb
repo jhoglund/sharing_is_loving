@@ -20,7 +20,7 @@ class ItemsController < RestrictedAccessController
   def update
     respond_to do |format|
       @item = Item.find(params[:id])
-      @item.created_by = current_user
+      @item.activity_by(current_user, :updated)
       if params[:ratings]
         @item.add_rating(params[:rating], current_user._id)
         @item.versionless do |item|
