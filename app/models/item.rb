@@ -22,6 +22,7 @@ class Item
   after_initialize :create_token
   
   embeds_many :ratings
+  embeds_many :comments
   
   has_many :activities, autosave: true 
   def activity_by person, activity='updated'
@@ -53,6 +54,17 @@ class Item
     self.secure_token = self.secure_token || SecureRandom.uuid
   end
   
+  def rollback! index
+    self.versionless do
+      self.revise!
+      self.versions.where(:version => index).first.attributes.each do |key,value|
+        self.write_attribute(key,value) unless key=='_id' || key=='version'
+      end
+      self.created_at = Time.now
+      self.save
+    end
+  end
+  
   class Tag
     attr_reader :name
     def initialize name=""
@@ -64,8 +76,8 @@ class Item
     self.tags.map{|n| Tag.new(n)}
   end
   
-  def add_rating value, user_id
-    self.ratings.build(:value => value, :user_id => user_id)
+  def like user_id
+    self.ratings.build(:value => 1, :user_id => user_id)
     self.rating_count = self.rating_count + 1
   end
   

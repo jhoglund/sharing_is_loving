@@ -34,10 +34,7 @@
 										By:
 										= item.user.name
 								%li
-									Likes
-									%span{:id => "like_count_#{item._id}"}
-										(#{item.rating_count})
-									= link_to_function('Like...', "sendLike('#{item._id}')")
+									= render :partial => 'like', :object => item
 						%td
 							%h4
 								%a{:href=> item_path(item)}= item.name
@@ -78,7 +75,7 @@
 						The document "#{link_to(activity.item.name, item_path(activity.item))}" was
 						= activity.type.downcase
 						by
-						= mail_to(activity.user.name, activity.user.email)
+						= mail_to(activity.user.email,activity.user.name)
 						%br
 						= l(activity.created_at, :format => :short)
 				.row-fluid

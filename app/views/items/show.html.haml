@@ -18,10 +18,7 @@
 									By:
 									= @item.user.name
 							%li
-								Likes
-								%span{:id => "like_count_#{@item._id}"}
-									(#{@item.rating_count})
-								= link_to_function('Like...', "sendLike('#{@item._id}')")
+								= render :partial => 'like', :object => @item
 					%td
 						%h4
 							= @item.name
@@ -37,11 +34,33 @@
 						%p
 							%a.btn{ :href => root_path } Close
 							%a.btn.btn-primary{:href=> edit_item_path(@item)} Edit
+						.comments{ :style => "display:#{@item.comments.blank? ? 'none' : 'static'}"}
+							%hr
+							%h5 Comments
+							= render :partial => '/comments/comment', :collection => @item.comments
+						%p(style="margin-top:30px")
+							= simple_form_for @item.comments.build, :url => comments_path, :remote => true, :html => { :'data-type' => 'html' } do |f|
+								= hidden_field_tag 'id', @item.id
+								= f.input :body, :as => :text, :label => false, :placeholder => 'Write a comment', :input_html => { :rows => 3, :class => 'span12'}
+								= f.submit 'Add comment', :class => 'btn'
+							
 						
-	.span4.sidebar
-		- unless @item.versions.empty?
+	- unless @item.versions.reverse.blank?
+		.span4.sidebar
 			%h4 Versions
-			%ul
-			- @item.versions.each_with_index do |version, i|
-				%li= link_to(version.updated_at, item_version_path(@item, i))
-			
+			- @item.versions.each do |version|
+				.row-fluid
+					.span3
+						%img.img-polaroid(src="#{version.user.avatar.url}" style="width:50px;height:50px")
+					.span9
+						Last updated by
+						= mail_to(version.user.email, version.user.name)
+						on
+						= l(version.updated_at, :format => :long)
+						%br
+						= link_to('View', item_version_path(@item, version.version))
+						
+				.row-fluid
+					.span12
+						%hr
+	

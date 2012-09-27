@@ -21,19 +21,22 @@ class ItemsController < RestrictedAccessController
     respond_to do |format|
       @item = Item.find(params[:id])
       @item.activity_by(current_user, :updated)
-      if params[:ratings]
-        @item.add_rating(params[:rating], current_user._id)
-        @item.versionless do |item|
-          item.update_attributes(params[:item])
-        end
-      else
-        @item.update_attributes(params[:item])
-      end
+      @item.update_attributes(params[:item])
       format.html do
         redirect_to item_path(@item)
       end
-      format.js do
-        head :ok
+    end
+  end
+  
+  def like
+    respond_to do |format|
+      @item = Item.find(params[:id])
+      @item.like(current_user._id)
+      @item.versionless do |item|
+        item.update_attributes(params[:item])
+      end
+      format.html do
+        render :text => @item.rating_count
       end
     end
   end

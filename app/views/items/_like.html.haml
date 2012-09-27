@@ -1,0 +1,4 @@
+.rating
+	= link_to('Like', like_item_path(like), :remote => true, :'data-type' => 'html', :class => 'rate')
+	%span.badge{:id => "like_count_#{like._id}"}
+		#{like.rating_count}

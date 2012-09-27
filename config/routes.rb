@@ -13,9 +13,17 @@ SharingIsLoving::Application.routes.draw do
   # This route can be invoked with purchase_url(:id => product.id)
 
   resources :items do
-    resources :versions
+    member do
+      get 'like'
+    end
+    resources :versions do
+      member do
+        get 'rollback'
+      end
+    end
   end
   resources :tags, :only => :show
+  resources :comments, :only => :create
   resource :search
 
   # Sample resource route with options:

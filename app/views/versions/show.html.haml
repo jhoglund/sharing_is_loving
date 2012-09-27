@@ -37,3 +37,4 @@
 								= @version.tags.map{|t| link_to(t, tag_path(t)) }.join(', ').html_safe
 						%p
 							%a.btn{ :href => item_path(@item) } Close version
+							%a.btn.btn-primary{ :href => rollback_item_version_path(@item, params[:id]) } Rollback to this version
