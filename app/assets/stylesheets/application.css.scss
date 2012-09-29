@@ -9,8 +9,11 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
+ *= require jquery.fileupload-ui
  *= require_tree .
 */
+@import "compass";
+
 body {
 	background-color:rgb(245,245,245)!important;
 }
@@ -126,4 +129,10 @@ body {
 }
 .rating {
 	margin-bottom:5px;
+}
+.document-drop-area {
+	@include border-radius;
+	width:100%;
+	height:200px;
+	background:rgba(0,0,0,0.2);
 }

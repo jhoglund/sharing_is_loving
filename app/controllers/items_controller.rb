@@ -47,5 +47,15 @@ class ItemsController < RestrictedAccessController
     @item.save!
     redirect_to root_path
   end
+  
+  def destroy
+    @item = Item.find(params[:id])
+    @item.destroy
+
+    respond_to do |format|
+      format.html { redirect_to items_url }
+      format.json { head :no_content }
+    end
+  end
     
 end

@@ -22,6 +22,7 @@ SharingIsLoving::Application.routes.draw do
       end
     end
   end
+  resources :uploads
   resources :tags, :only => :show
   resources :comments, :only => :create
   resource :search

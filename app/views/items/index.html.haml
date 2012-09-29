@@ -34,7 +34,7 @@
 										By:
 										= item.user.name
 								%li
-									= render :partial => 'like', :object => item
+									= render :partial => '/items/like', :object => item
 						%td
 							%h4
 								%a{:href=> item_path(item)}= item.name
@@ -49,6 +49,8 @@
 									= item.tags.map{|t| link_to(t, tag_path(t)) }.join(', ').html_safe
 			
 	.span3.sidebar
+		.document-drop-area
+			Drop documents here to upload
 		%a.btn.btn-primary.btn-large.icon-plus(href="#{new_item_path}" style="display:block")
 			Add document
 		.search

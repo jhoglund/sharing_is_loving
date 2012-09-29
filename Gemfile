@@ -18,6 +18,7 @@ gem 'rack-raw-upload', '1.1.0'
 gem 'mongoid_search', :path => 'vendor/gems/mongoid_search' # https://github.com/mauriciozaffari/mongoid_search
 gem "mongoid-simple-tags", "0.0.7", :path => 'vendor/gems/mongoid-simple-tags' # https://github.com/chebyte/mongoid-simple-tags
 gem 'devise' # https://github.com/plataformatec/devise
+gem "jquery-fileupload-rails" # https://github.com/tors/jquery-fileupload-rails
 
 # Gems used only for assets and not required
 # in production environments by default.

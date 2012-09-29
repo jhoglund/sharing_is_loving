@@ -1,0 +1,36 @@
+
+= simple_form_for @item, :url => uploads_path, :html => { :enctype => "multipart/form-data", :id => 'fileupload' } do |f|
+	/ The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload
+	.row-fluid.fileupload-buttonbar
+		.span12
+			.btn.btn-success.fileinput-button
+				%i.icon-plus.icon-white
+				%span Add files...
+				= f.input :file, :as => 'file', :label => false, :input_html => { :multiple => 'multiple' }
+			%button.btn.btn-primary.start(type="submit")
+				%i.icon-upload.icon-white
+				%span Start upload
+			%button.btn.btn-warning.cancel(type="reset")
+				%i.icon-ban-circle.icon-white
+				%span Cancel upload
+			%button.btn.btn-danger.delete(type="button")
+				%i.icon-trash.icon-white
+				%span Delete
+			%input.toggle(type="hidden" value="1")
+			/ The global progress information
+			.span5.fileupload-progress.fade
+				/The global progress bar
+				.progress.progress-success.progress-striped.active(role="progressbar" aria-valuemin="0" aria-valuemax="100")
+					.bar(style="width:0%;")
+					.progress-extended
+						&nbsp;
+		/ The loading indicator is shown during file processing
+		.fileupload-loading
+		%br
+		%br
+		%br
+		/ The table listing the files available for upload/download
+		%div(role="presentation")
+			.files(data-toggle="modal-gallery" data-target="#modal-gallery")
+
+= render 'js_templates'

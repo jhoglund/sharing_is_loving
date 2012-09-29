@@ -12,7 +12,9 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-fileupload
 //= require_tree .
+
 
 $(function(){
 	$('#new_comment').bind('ajax:success', function(e,data){

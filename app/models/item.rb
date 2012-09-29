@@ -81,4 +81,18 @@ class Item
     self.rating_count = self.rating_count + 1
   end
   
+  include Rails.application.routes.url_helpers
+
+  def to_jq_upload
+    {
+      "name" => self.file_filename,
+      "size" => self.file.size,
+      "url" => self.file.url,
+      "delete_url" => item_path(self),
+      "delete_type" => "DELETE" 
+    }
+  end
+
+  
+  
 end
