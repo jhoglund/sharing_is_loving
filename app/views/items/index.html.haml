@@ -15,11 +15,23 @@
 		- if flash
 			- flash.each do |k,v|
 				.alert.alert-block{ :class => "alert-#{k.to_s}" }= v
+		= simple_form_for @item, :url => uploads_path, :html => { :enctype => "multipart/form-data", :id => 'fileupload' } do |f|
+			.file-uploads-list.hide(role="presentation")
+				.fileinput-button.hidden
+					= f.input :file, :as => 'file', :label => false, :input_html => { :multiple => 'multiple', :id => 'active_uploader' }
+				.files(data-toggle="modal-gallery" data-target="#modal-gallery")
+				.upload-buttons.fileupload-buttonbar
+					%input.toggle(type="hidden" value="1")
+					%button.btn.btn-large.cancel(type="reset")
+						Cancel
+					%button.btn.btn-success.btn-large.start(type="submit")
+						Upload documents
+					
 		%table.table.files
 			%tbody
 				- @items.each do |item|
 					%tr
-						%td.preview
+						%td.thumb
 							%img.img-polaroid(src="#{item.preview.thumb.url}" style="margin:0 10px 0 0;width:100px;height:100px")
 							%ul
 								- unless item.file.file.nil?
@@ -51,8 +63,8 @@
 	.span3.sidebar
 		.document-drop-area
 			Drop documents here to upload
-		%a.btn.btn-primary.btn-large.icon-plus(href="#{new_item_path}" style="display:block")
-			Add document
+		%button#test_btn.btn.btn-primary.icon-plus(style="display:block;width:219px")
+			Browse for documents...
 		.search
 			%h4 Search
 			%form{:action => search_path, :method => 'get', :class => search? ? 'active-search' : ''}
@@ -83,3 +95,4 @@
 				.row-fluid
 					.span12
 						%hr
+= render '/uploads/js_templates'

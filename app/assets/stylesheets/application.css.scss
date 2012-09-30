@@ -86,7 +86,7 @@ body {
 	}
 }
 .files {
-	.preview {
+	.thumb {
 		width:100px;
 		padding:20px 20px 0 0;
 		ul {
@@ -133,6 +133,55 @@ body {
 .document-drop-area {
 	@include border-radius;
 	width:100%;
-	height:200px;
-	background:rgba(0,0,0,0.2);
+	background:rgba(0,0,0,0);
+	font-size:18px;
+	color:rgba(0,0,0,0.2);
+	text-align:center;
+	border:2px dashed rgba(0,0,0,0.4);
+	box-sizing: border-box;
+	padding:20px;
+	margin-bottom:10px;
+}
+.file-uploads-list {
+	position:relative;
+	z-index:1;
+	background:rgb(245,245,245);
+	margin:0 -29px 0 -24px;
+	box-sizing: border-box;
+	padding:20px 29px 0px 39px;
+	border-right:1px solid #ddd;
+	.upload-buttons {
+		margin:0 -29px 0 -39px;
+		box-sizing: border-box;
+		padding:20px 29px 20px 24px;
+		text-align:right;
+		background:rgb(222,222,222);
+	}
+}
+.progress {
+	width:110px!important;
+	height:10px!important;
+	margin-bottom:4px!important;
+}
+table.table.files {
+	tr:first-child td {
+		border-top:none
+	}
+}
+.upload-fields {
+	position:relative;
+	.cancel {
+		position:absolute;
+		top:0px;
+		right:0px;
+		a {
+			font-size:20px;
+			color:rgba(0,0,0,0.2);
+			text-decoration:none;
+			cursor:pointer;
+			&:hover {
+				color:rgba(0,0,0,0.5);
+			}
+		}
+	}
 }

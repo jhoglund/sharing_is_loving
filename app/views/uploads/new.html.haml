@@ -6,7 +6,7 @@
 			.btn.btn-success.fileinput-button
 				%i.icon-plus.icon-white
 				%span Add files...
-				= f.input :file, :as => 'file', :label => false, :input_html => { :multiple => 'multiple' }
+				= f.input :file, :as => 'file', :label => false, :input_html => { :multiple => 'multiple', :id => 'active_uploader' }
 			%button.btn.btn-primary.start(type="submit")
 				%i.icon-upload.icon-white
 				%span Start upload

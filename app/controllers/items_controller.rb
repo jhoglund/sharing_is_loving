@@ -2,6 +2,7 @@ class ItemsController < RestrictedAccessController
   before_filter :load_tags, :load_stream
   
   def index
+    @item = Item.new
     @items = Item.all
   end
   

@@ -85,7 +85,11 @@ class Item
 
   def to_jq_upload
     {
-      "name" => self.file_filename,
+      "name" => self.name,
+      "filename" => self.file_filename,
+      "description" => self.description,
+      "tags" => self.tags,
+      "tags_url" => tag_path(''),
       "size" => self.file.size,
       "url" => self.file.url,
       "delete_url" => item_path(self),

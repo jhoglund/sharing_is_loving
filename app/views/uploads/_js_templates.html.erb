@@ -8,124 +8,133 @@
 	  emptyResult: 'Empty file upload result'
   };
 </script>
+
 <script id="template-upload" type="text/x-tmpl">
 {% for (var i=0, file; file=o.files[i]; i++) { %}
-    <div class="template-upload fade hero-unit">
-			<table class="upload-table table">
-				<tbody>
-					<tr>
-		        <td class="preview"><span class="fade"></span></td>
-						<td>
-							<p><input name="item[name]" placeholder="Name">
-							<p><textarea name="item[description]" placeholder="Description" rows="2"></textarea>
-							<p><input name="item[tag_list]" placeholder="Tags">
-						</td>
-						<td>
-			        {% if (file.error) { %}
-			            <div class="error" colspan="2"><span class="label label-important">Error</span> {%=file.error%}</div>
+	<div class="template-upload fade">
+		<table class="table files">
+			<tbody>
+				<tr>
+					<td class="thumb">
+						<div class="preview img-polaroid" style="margin:0 10px 0 0;width:100px;height:100px!important">
+							<span></span>
+						</div>
+						<ul>
+							<li>
+								<div class="progress progress-success progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+									<div class="bar" style="width:0%;"></div>
+								</div>
+							</li>
+							<i style="display:none">
+								{% if (o.files.valid && !i) { %}
+				            <div class="start">{% if (!o.options.autoUpload) { %}
+				                <button class="btn btn-small">
+				                    <i class="icon-upload icon-white"></i>
+				                    <span>Start</span>
+				                </button>
+				            {% } %}</div>
+				        {% } %}
+								
+							</i>
+							<li class="size">
+								Size: 
+								<span>{%=o.formatFileSize(file.size)%}</span>
+							</li>
+						</ul>
+					</td>
+					<td>
+						<div class="upload-fields">
+							{% if (file.error) { %}
+			          <div class="error" colspan="2"><span class="label label-important">Error</span> {%=file.error%}</div>
 			        {% } else if (o.files.valid && !i) { %}
-			            <div class="progress progress-success progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="bar" style="width:0%;"></div></div>
+				        <p>
+									<input class="span11" name="item[name]" type="text" placeholder="Name">
+								</p>
+								<div class="download name">
+									<div class="icon-file"></div>
+									<span>{%=file.name%}</span>
+								</div>
+								<p>
+									<textarea class="span11" name="item[description]" placeholder="Description" rows="2"></textarea>
+								</p>
+								<p>
+									<input class="span11" name="item[tag_list]" type="text" placeholder="Tags">
+								</p>
+								<div class="cancel">
+									<a class="icon-remove-sign"></a>
+								</div>
 			        {% } %}
-			        <div class="name">File: <b><span>{%=file.name%}</span></b></div>
-			        <div class="size">Size: <b><span>{%=o.formatFileSize(file.size)%}</span></b></div>
-							{% if (o.files.valid && !i) { %}
-			            <td class="start">{% if (!o.options.autoUpload) { %}
-			                <button class="btn btn-primary">
-			                    <i class="icon-upload icon-white"></i>
-			                    <span>Start</span>
-			                </button>
-			            {% } %}</td>
-			        {% } %}
-			        
-					    <td class="cancel">{% if (!i) { %}
-			            <button class="btn btn-warning">
-			                <i class="icon-ban-circle icon-white"></i>
-			                <span>Cancel</span>
-			            </button>
-			        {% } %}</td>
-						</td>
-		    </tr>
-		  </tbody>
-	  </table>
+						</div>
+		        						
+					</td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
 {% } %}
 </script>
 
-<script id="template-upload-backup" type="text/x-tmpl">
-{% for (var i=0, file; file=o.files[i]; i++) { %}
-    <tr class="template-upload fade">
-        <td class="preview"><span class="fade"></span></td>
-				<td>
-					<table class="table">
-						<tr>
-							    <td class="name"><span>{%=file.name%}</span></td>
-					        <td class="size"><span>{%=o.formatFileSize(file.size)%}</span></td>
-					        {% if (file.error) { %}
-					            <td class="error" colspan="2"><span class="label label-important">Error</span> {%=file.error%}</td>
-					        {% } else if (o.files.valid && !i) { %}
-					            <td>
-					                <div class="progress progress-success progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="bar" style="width:0%;"></div></div>
-					            </td>
-					            <td class="start">{% if (!o.options.autoUpload) { %}
-					                <button class="btn btn-primary">
-					                    <i class="icon-upload icon-white"></i>
-					                    <span>Start</span>
-					                </button>
-					            {% } %}</td>
-					        {% } else { %}
-					            <td colspan="2"></td>
-					        {% } %}
-					        <td class="cancel">{% if (!i) { %}
-					            <button class="btn btn-warning">
-					                <i class="icon-ban-circle icon-white"></i>
-					                <span>Cancel</span>
-					            </button>
-					        {% } %}</td>
-					    </tr>
-							<tr>
-								<td colspan="6">
-									<input name="item[description]" placeholder="Description">
-									<input name="item[tag_list]" placeholder="Tags">
-								</td>
-							</tr>
-					    
-					</table>
-				</td>
-			</tr>
-{% } %}
-</script>
-<!-- The template to display files available for download -->
 <script id="template-download" type="text/x-tmpl">
 {% for (var i=0, file; file=o.files[i]; i++) { %}
-    <tr class="template-download fade">
-        {% if (file.error) { %}
-            <td></td>
-            <td class="name"><span>{%=file.name%}</span></td>
-            <td class="size"><span>{%=o.formatFileSize(file.size)%}</span></td>
-            <td class="error" colspan="2"><span class="label label-important">Error</span> {%=file.error%}</td>
-        {% } else { %}
-            <td class="preview">{% if (file.thumbnail_url) { %}
-                <a href="{%=file.url%}" title="{%=file.name%}" rel="gallery" download="{%=file.name%}"><img src="{%=file.thumbnail_url%}"></a>
-            {% } %}</td>
-            <td class="name">
-                <a href="{%=file.url%}" title="{%=file.name%}" rel="{%=file.thumbnail_url&&'gallery'%}" download="{%=file.name%}">{%=file.name%}</a>
-            </td>
-            <td class="size"><span>{%=o.formatFileSize(file.size)%}</span></td>
-            <td colspan="2"></td>
-        {% } %}
-        <td class="delete">
-            <button class="btn btn-danger" data-type="{%=file.delete_type%}" data-url="{%=file.delete_url%}">
-                <i class="icon-trash icon-white"></i>
-                <span>Delete</span>
-            </button>
-            <input type="hidden" name="delete" value="1">
-        </td>
-    </tr>
+	<div class="template-download fade">
+		<table class="table files">
+			<tbody>
+				<tr>
+					<td class="thumb">
+						<div class="preview img-polaroid" style="margin:0 10px 0 0;width:100px;height:100px!important">
+							<span></span>
+						</div>
+						<ul>
+							<li>
+								<div class="delete">
+			            <button class="btn btn-danger btn-small" style="width:110px" data-type="{%=file.delete_type%}" data-url="{%=file.delete_url%}">
+			                <i class="icon-trash icon-white"></i>
+			                <span>Delete</span>
+			            </button>
+			            <input type="hidden" name="delete" value="1">
+				        </div>
+							</li>
+							<li class="size">
+								Size: 
+								<span>{%=o.formatFileSize(file.size)%}</span>
+							</li>
+						</ul>
+					</td>
+					<td>
+						{% if (file.error) { %}
+		          <div class="error" colspan="2"><span class="label label-important">Error</span> {%=file.error%}</div>
+		        {% } else { %}
+			        <h4>{%=file.name%}</h4>
+							<div class="download name">
+								<div class="icon-file"></div>
+								<a href="{%=file.url%}" title="{%=file.filename%}" download="{%=file.filename%}">{%=file.filename%}</a>
+							</div>
+							<p>{%=file.description%}</p>
+							<p>
+								Tags:
+								{% for (var x=0, tag; tag=o.files[i].tags[x]; x++) { %}
+									<a href="{%= o.files[i].tags_url + tag %}">{%= tag %}</a>
+									{% if(x!=o.files[i].tags.length-1){ %}
+										,
+									{% } %}
+								{% } %}
+							</p>
+		        {% } %}
+		        						
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 {% } %}
 </script>
 
+
 <script type="text/javascript" charset="utf-8">
   $(function () {
+	$('#test_btn').bind('click', function(){
+		$('#active_uploader').click()
+	})
       // Initialize the jQuery File Upload widget:
       $('#fileupload').fileupload();
       // 
@@ -149,6 +158,7 @@
 			});
 			
 			$('#fileupload').bind('fileuploadadded', function (e, data) {
+				$('.file-uploads-list').show();
 				var inputs = data.context.find(':input');
 				inputs.filter('[name="item[name]"]').val(humanize(data.files[0].name))
 			});
