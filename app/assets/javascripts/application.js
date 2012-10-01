@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require jquery-fileupload
 //= require_tree .
+//= require ./infinitive_scrolling
 
 
 $(function(){
@@ -28,3 +29,39 @@ $(function(){
 });
 
 
+// Infinitive scrolling
+(function(){
+  var page = 1,
+      loading = false;
+
+  function nearBottomOfPage() {
+    return $(window).scrollTop() > $(document).height() - $(window).height() - 200;
+  }
+
+  $(window).scroll(function(){
+    if(loading) {
+      return;
+    }
+
+    if(nearBottomOfPage()) {
+      loading=true;
+      page++;
+      $('.spinner').show();
+			$.ajax({
+        url: '/items?page=' + page,
+        type: 'get',
+        dataType: 'html',
+        success: function(html) {
+					$('.spinner').hide();
+					$('.items-list').append(html)
+					$(window).sausage('draw');
+          loading=false;
+        },
+				error:function(e,data){
+				}
+      });
+    }
+  });
+
+  $(window).sausage();
+}());

@@ -2,8 +2,14 @@ class ItemsController < RestrictedAccessController
   before_filter :load_tags, :load_stream
   
   def index
-    @item = Item.new
-    @items = Item.all
+    respond_to do |format|
+      @items = Item.page(params[:page])
+      format.html do
+        if request.xhr?
+          render :partial => '/items/items_list.html.haml', :layout => false
+        end
+      end
+    end
   end
   
   def new

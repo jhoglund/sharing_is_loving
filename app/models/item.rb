@@ -4,7 +4,7 @@ class Item
   include Mongoid::Document::Taggable
   include Mongoid::Search
   include Mongoid::Versioning
-  
+    
   mount_uploader :file, FileUploader do
     def store_dir
       model.path

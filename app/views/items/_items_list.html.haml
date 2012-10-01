@@ -1,0 +1,30 @@
+- @items.each do |item|
+	%tr
+		%td.thumb
+			%img.img-polaroid(src="#{item.preview.thumb.url}" style="margin:0 10px 0 0;width:100px;height:100px")
+			%ul
+				- unless item.file.file.nil?
+					%li
+						Size:
+						= number_to_human_size(item.file.file.size)
+					%li
+						Added:
+						= item.created_at.strftime("%m/%d/%Y")
+				- unless item.user.blank?
+					%li 
+						By:
+						= item.user.name
+				%li
+					= render :partial => '/items/like', :object => item
+		%td
+			%h4
+				%a{:href=> item_path(item)}= item.name
+			.download
+				%span.icon-file
+				%a(href="#{item.file.url}")
+					= item.file_filename
+			%p= item.description
+			- unless item.tags.blank?
+				%p.tags 
+					Tags:
+					= item.tags.map{|t| link_to(t, tag_path(t)) }.join(', ').html_safe

@@ -15,7 +15,7 @@
 		- if flash
 			- flash.each do |k,v|
 				.alert.alert-block{ :class => "alert-#{k.to_s}" }= v
-		= simple_form_for @item, :url => uploads_path, :html => { :enctype => "multipart/form-data", :id => 'fileupload' } do |f|
+		= simple_form_for Item.new, :url => uploads_path, :html => { :enctype => "multipart/form-data", :id => 'fileupload' } do |f|
 			.file-uploads-list.hide(role="presentation")
 				.fileinput-button.hidden
 					= f.input :file, :as => 'file', :label => false, :input_html => { :multiple => 'multiple', :id => 'active_uploader' }
@@ -28,38 +28,10 @@
 						Upload documents
 					
 		%table.table.files
-			%tbody
-				- @items.each do |item|
-					%tr
-						%td.thumb
-							%img.img-polaroid(src="#{item.preview.thumb.url}" style="margin:0 10px 0 0;width:100px;height:100px")
-							%ul
-								- unless item.file.file.nil?
-									%li
-										Size:
-										= number_to_human_size(item.file.file.size)
-									%li
-										Added:
-										= item.created_at.strftime("%m/%d/%Y")
-								- unless item.user.blank?
-									%li 
-										By:
-										= item.user.name
-								%li
-									= render :partial => '/items/like', :object => item
-						%td
-							%h4
-								%a{:href=> item_path(item)}= item.name
-							.download
-								%span.icon-file
-								%a(href="#{item.file.url}")
-									= item.file_filename
-							%p= item.description
-							- unless item.tags.blank?
-								%p.tags 
-									Tags:
-									= item.tags.map{|t| link_to(t, tag_path(t)) }.join(', ').html_safe
-			
+			%tbody.items-list
+				= render '/items/items_list'
+		.spinner
+		
 	.span3.sidebar
 		.document-drop-area
 			Drop documents here to upload
