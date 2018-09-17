@@ -19,4 +19,4 @@ production:
       username: sharing_is_loving
       password: passw0rd
       hosts:
-        - ds037617.mongolab.com:37617
+        - ds037617.mlab.com:37617
