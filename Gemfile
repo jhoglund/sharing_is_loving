@@ -11,7 +11,7 @@ gem 'crack'
 gem 'simple_form'
 gem "tabletastic"
 gem 'carrierwave' # https://github.com/jnicklas/carrierwave
-gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid', :branch => "mongoid-3.0" # https://github.com/jnicklas/carrierwave-mongoid
+gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'#, :branch => "mongoid-3.0" # https://github.com/jnicklas/carrierwave-mongoid
 gem "fog", "~> 1.3.1" # https://github.com/fog/fog
 gem 'mini_magick', '3.4'
 gem 'rack-raw-upload', '1.1.0'
